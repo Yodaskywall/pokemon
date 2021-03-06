@@ -27,11 +27,11 @@ def pickle_receive(conn):
 class Network:
     def __init__(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server = "192.168.1.108"
+        self.server = "192.168.43.108"
         self.port = 25565
         self.addr = (self.server, self.port)
 
-    def picke_receive(self):
+    def pickle_receive(self):
         return pickle_receive(self.client)
 
     def pickle_send(self, object):
@@ -45,8 +45,7 @@ class Network:
         try:
             self.client.connect(self.addr)
             response = self.pickle_receive()
-            self.id = response[0]
-            return response[1]
+            return response
 
         except Exception as e:
             print(e)

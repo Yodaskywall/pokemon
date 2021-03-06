@@ -1,51 +1,124 @@
 from random import randint
 import math
+import pickle
 from pokemon import Pokemon, get_natures
+
+with open("type_info", "rb") as file:
+    types, type_effectiveness = pickle.load(file)
+
+
+def effectiveness(move_type, target_type):
+    eff = 1
+    for t in target_type:
+        i = types.index(t)
+        eff *= type_effectiveness[move_type][i]
+    return eff
+
 
 class Move:
     max_pp = 10
     power = 80
     category = "special"
     move_type = "Water"
+    flinch = False
+    priority = 0
+    accuracy = 100
     def __init__(self):
         self.pp = self.max_pp
 
     def attack(self, user, target):
-        random = randint(85, 100) / 100
-        stab = 1
-        if self.move_type in user.type:
-            stab = 1.5
+        prob = randint(0,100)
+        if self.accuracy >= prob:
+            random = randint(85, 100) / 100
+            stab = 1
+            if self.move_type in user.type:
+                stab = 1.5
 
-        if self.category == "special":
-            attack = user.stats[3]
-            defense = target.stats[4]
+            if self.category == "special":
+                attack = user.stats[3]
+                defense = target.stats[4]
 
-        elif self.category == "physical":
-            attack = user.stats[1]
-            defense = target.stats[2]
+            elif self.category == "physical":
+                attack = user.stats[1]
+                defense = target.stats[2]
 
-        modifier = stab * random
+            eff = effectiveness(self.move_type, target.type)
 
-       #https://bulbapedia.bulbagarden.net/wiki/Damage 
+            modifier = stab * random * eff
 
-        damage = math.floor(((( (((2 * user.level) / 5) + 2) * self.power * (attack / defense)) / 50) + 2) * modifier)
-        self.pp -= 1
-        target.hp -= damage
+           #https://bulbapedia.bulbagarden.net/wiki/Damage 
 
-move = Move()
-user = Pokemon("Registeel", [80,75,150,75,150,50], ["Steel"])
-user.change_nature("Sassy")
-target = Pokemon("Registeel", [80,75,150,75,150,50], ["Steel"])
-target.change_nature("Sassy")
+            damage = math.floor(((( (((2 * user.level) / 5) + 2) * self.power * (attack / defense)) / 50) + 2) * modifier)
+            self.pp -= 1
+            target.hp -= damage
 
-print(user.stats)
-print(target.stats)
+class Fake_Out(Move):
+    max_pp = 16
+    move_type = "Normal"
+    power = 40
+    category = "physical"
+    flinch = True
+    priority = 1
+    def __init__(self):
+        super().__init__()
 
-move.attack(user, target)
+    def attack(self, user, target):
+        if user.first_turn:
+            super().attack(user, target)
 
-print(user.hp)
-print(target.hp)
-damage = target.stats[0] - target.hp
-print(damage)
-print(damage * 100 / target.stats[0])
+class Grassy_Slide(Move):
+    max_pp = 16
+    move_type = "Grass"
+    power = 70
+    category = "physical"
+    def __init__(self):
+        super().__init__()
+
+    def attack(self, user, target):
+        super().attack(user, target)
+
+class Knock_Off(Move):
+    max_pp = 20
+    move_type = "Dark"
+    power = 65
+    category = "physical"
+    def __init__(self):
+        super().__init__()
+
+    def attack(self, user, target):
+        if target.item:
+            self.power = 65 * 1.5
+        else:
+            self.power = 65
+
+        super().attack(user, target)
+
+class U_Turn(Move):
+    max_pp = 30
+    move_type = "Bug"
+    power = 70
+    category = "physical"
+    def __init__(self):
+        super().__init__()
+
+    def attack(self, user, target):
+        super().__attack__(user, target)
+
+if __name__ == "__main__":
+    move = Move()
+    user = Pokemon("Registeel", [80,75,150,75,150,50], ["Steel"])
+    user.change_nature("Sassy")
+    target = Pokemon("Registeel", [80,75,150,75,150,50], ["Steel"])
+    target.change_nature("Sassy")
+
+    print(user.stats)
+    print(target.stats)
+
+    move.attack(user, target)
+
+    print(user.hp)
+    print(target.hp)
+    damage = target.stats[0] - target.hp
+    print(damage)
+    print(damage * 100 / target.stats[0])
 

@@ -7,6 +7,7 @@ def get_natures():
         natures = pickle.load(file)
     return natures
 
+
 class Pokemon:
     def __init__(self, name, base_stats, types):
         self.name = name
@@ -25,6 +26,7 @@ class Pokemon:
         self.ivs = [31 for x in range(6)]
         self.calculate_stats()
         self.hp = self.stats[0]
+        self.first_turn = True
 
     def calculate_stats(self):
         #HP = floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + Level + 10
@@ -42,6 +44,7 @@ class Pokemon:
 
     def set_evs(self, evs):
         self.evs = evs
+        self.calculate_stats()
 
     def change_nature(self, nature):
         self.nature = nature
@@ -53,9 +56,6 @@ class Pokemon:
     def __str__(self):
         return str(self.name) + "\n" + str(self.stats)
 
-
-registeel = Pokemon("Registeel", [80,75,150,75,150,50], ["Steel"])
-registeel.change_nature("Sassy")
-print(registeel)
-
+def get_pokemon(name):
+    pass
 

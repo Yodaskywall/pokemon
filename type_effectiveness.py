@@ -42,6 +42,6 @@ for tipo in type_effective:
 type_info = [types, type_effective]
 
 with open("type_info", "wb") as file:
-    pickle.dumps(type_info, file)
+    pickle.dump(type_info, file)
 
 
