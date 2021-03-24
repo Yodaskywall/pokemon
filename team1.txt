@@ -1,0 +1,56 @@
+Snorlax @ Chesto Berry  
+Ability: Clear Body  
+EVs: 252 HP / 4 Def / 252 SpD  
+Sassy Nature  
+- Protect 
+- Flamethrower
+- Earthquake  
+- Body Press  
+
+Lapras @ Aguav Berry  
+Ability: Misty Surge  
+Shiny: Yes  
+EVs: 124 HP / 252 SpA / 132 SpD  
+Modest Nature  
+IVs: 0 Atk  
+- Ice beam  
+- Scald  
+- Dazzling Gleam  
+- Blizzard  
+
+Zapdos @ Wiki Berry  
+Ability: Intimidate  
+EVs: 252 HP / 252 Atk / 4 Def  
+Adamant Nature  
+- Earthquake  
+- Thunderbolt
+- Rock Slide  
+- Fly  
+
+Venusaur @ Sitrus Berry  
+Ability: Grassy Surge  
+EVs: 252 HP / 56 Atk / 60 SpD / 140 Spe  
+Adamant Nature  
+- Fake Out  
+- Grassy Glide  
+- Knock Off  
+- U-turn  
+
+Arcanine @ Thick Club  
+Ability: Lightning Rod  
+EVs: 252 HP / 252 Atk / 4 SpD  
+Adamant Nature  
+- Flare Blitz  
+- Shadow Bone  
+- Wild Charge 
+- Protect  
+
+Golem @ Chople Berry  
+Ability: Sand Stream  
+EVs: 180 HP / 252 Atk / 76 Spe  
+Adamant Nature  
+- Crunch  
+- Stone Edge  
+- Earthquake 
+- Protect  
+

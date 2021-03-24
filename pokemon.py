@@ -18,6 +18,8 @@ class Pokemon:
 
         self.type = types
 
+        self.protected = False
+        self.protected_last_turn = False
         self.nature = "Serious"
         self.level = 100
         self.moves = [None, None, None, None]
@@ -25,8 +27,12 @@ class Pokemon:
         self.evs = [0 for x in range(6)]
         self.ivs = [31 for x in range(6)]
         self.calculate_stats()
-        self.hp = self.stats[0]
         self.first_turn = True
+
+    def dead(self):
+        if self.hp <= 0:
+            return True
+        return False
 
     def calculate_stats(self):
         #HP = floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + Level + 10
@@ -41,6 +47,7 @@ class Pokemon:
             i += 1
 
         self.stats = stats
+        self.hp = self.stats[0]
 
     def set_evs(self, evs):
         self.evs = evs

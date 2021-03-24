@@ -19,38 +19,63 @@ class Move:
     max_pp = 10
     power = 80
     category = "special"
-    move_type = "Water"
+    move_type = "Normal"
     flinch = False
     priority = 0
     accuracy = 100
+    name = "xd"
     def __init__(self):
         self.pp = self.max_pp
 
     def attack(self, user, target):
-        prob = randint(0,100)
-        if self.accuracy >= prob:
-            random = randint(85, 100) / 100
-            stab = 1
-            if self.move_type in user.type:
-                stab = 1.5
+        if not target.protected:
+            prob = randint(0,100)
+            if self.accuracy >= prob:
+                random = randint(85, 100) / 100
+                stab = 1
+                if self.move_type in user.type:
+                    stab = 1.5
 
-            if self.category == "special":
-                attack = user.stats[3]
-                defense = target.stats[4]
+                if self.category.lower() == "special":
+                    attack = user.stats[3]
+                    defense = target.stats[4]
 
-            elif self.category == "physical":
-                attack = user.stats[1]
-                defense = target.stats[2]
+                elif self.category.lower() == "physical":
+                    attack = user.stats[1]
+                    defense = target.stats[2]
 
-            eff = effectiveness(self.move_type, target.type)
+                eff = effectiveness(self.move_type, target.type)
 
-            modifier = stab * random * eff
+                modifier = stab * random * eff
 
-           #https://bulbapedia.bulbagarden.net/wiki/Damage 
+               #https://bulbapedia.bulbagarden.net/wiki/Damage 
 
-            damage = math.floor(((( (((2 * user.level) / 5) + 2) * self.power * (attack / defense)) / 50) + 2) * modifier)
-            self.pp -= 1
-            target.hp -= damage
+                damage = math.floor(((( (((2 * user.level) / 5) + 2) * self.power * (attack / defense)) / 50) + 2) * modifier)
+                self.pp -= 1
+                target.hp -= damage
+
+
+class Protect(Move):
+    category = "Status"
+    accuracy = 100
+    max_pp = 16
+    priority = 4
+    name = "Protection"
+    def __init__(self):
+        super().__init__()
+    def attack(self, user, target):
+        if user.protected_last_turn:
+            if randint(1,100) > 50:
+                user.protected = True
+                print(f"{user.name} used protection.")
+        else:
+            user.protected = True
+            print(f"{user.name} used protection.")
+
+
+CUSTOM_MOVES = {
+            "Protect" : Protect(),
+        }
 
 class Fake_Out(Move):
     max_pp = 16

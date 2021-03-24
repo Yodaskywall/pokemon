@@ -1,0 +1,56 @@
+Dragonite @ Chesto Berry  
+Ability: Clear Body  
+EVs: 252 Spe / 4 Def / 252 Atk  
+Sassy Nature  
+- Protect 
+- Dragon Claw
+- Earthquake  
+- Fly  
+
+Gyarados @ Aguav Berry  
+Ability: Misty Surge  
+Shiny: Yes  
+EVs: 252 HP / 252 Atk / 132 SpD  
+Modest Nature  
+IVs: 0 Atk  
+- Waterfall  
+- Bounce
+- Crunch 
+- Protect  
+
+Ninetales @ Wiki Berry  
+Ability: Intimidate  
+EVs: 252 HP / 252 Atk / 4 Def  
+Adamant Nature  
+- Flamethrower 
+- Solar Beam
+- Protect  
+- Thunderbolt
+
+Vileplume @ Sitrus Berry  
+Ability: Grassy Surge  
+EVs: 252 HP / 56 Atk / 60 SpD / 140 Spe  
+Adamant Nature  
+- Leaf Storm  
+- Protect  
+- Sludge Bomb 
+- U-turn  
+
+Mew @ Thick Club  
+Ability: Lightning Rod  
+EVs: 252 HP / 252 Atk / 4 SpD  
+Adamant Nature  
+- Psychic
+- Bug Buzz  
+- Focus Blast
+- Protect  
+
+Pikachu @ Chople Berry  
+Ability: Sand Stream  
+EVs: 180 HP / 252 Atk / 76 Spe  
+Adamant Nature  
+- Thunderbolt
+- Surf 
+- Thunder 
+- Protect
+
